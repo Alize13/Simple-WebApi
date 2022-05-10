@@ -138,6 +138,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />
+    <Content Include="Data\CreateTable.sql" />
+    <Content Include="Data\TSP_MemberLevel_Delete.sql" />
+    <Content Include="Data\TSP_MemberSearch_GetList.sql" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
