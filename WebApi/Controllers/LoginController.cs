@@ -16,20 +16,23 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace WebApi.Controllers
 {
+    /// <summary>
+    /// 登入
+    /// </summary>
     public class LoginController : ApiController
     {
         string cnStr = WebConfigurationManager.ConnectionStrings["DBTESTConnStr"].ConnectionString;
-        // GET api/<controller>
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        //// GET api/<controller>
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
 
-        // GET api/<controller>/5
-        public string Get(int id)
-        {
-            return "value";
-        }
+        //// GET api/<controller>/5
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
 
 
         #region 取得JWT TOKEN
@@ -158,14 +161,14 @@ namespace WebApi.Controllers
         }
         #endregion
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        //// PUT api/<controller>/5
+        //public void Put(int id, [FromBody]string value)
+        //{
+        //}
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
+        //// DELETE api/<controller>/5
+        //public void Delete(int id)
+        //{
+        //}
     }
 }

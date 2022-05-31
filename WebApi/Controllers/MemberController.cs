@@ -12,12 +12,16 @@ namespace WebApi.Controllers
     public class MemberController : ApiController
     {
         // GET api/<controller>
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
 
+        /// <summary>
+        /// 刪除會員資料
+        /// </summary>
         // DELETE api/<controller>/5
+        [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
             APIResultObject result = new APIResultObject();
@@ -36,7 +40,10 @@ namespace WebApi.Controllers
             return Json(result);
         }
 
-        // GET api/<controller>/5
+        /// <summary>
+        /// 篩選查詢會員資料
+        /// </summary>
+        // GET api/<controller>/
         public IHttpActionResult Get(MemberSearchParam param)
         {
             APIResultObject result = new APIResultObject();
@@ -55,8 +62,12 @@ namespace WebApi.Controllers
             return Json(result);
         }
 
-        // Post api/<controller>/5
-        public IHttpActionResult Post(DB_Member _model)
+        /// <summary>
+        /// 新增會員資料
+        /// </summary>
+        // Post api/<controller>/
+        [HttpPost]
+        public IHttpActionResult Post([FromBody] DB_Member _model)
         {
             APIResultObject result = new APIResultObject();
             try
@@ -73,7 +84,11 @@ namespace WebApi.Controllers
             return Json(result);
         }
 
-        // PUT api/<controller>/5
+        /// <summary>
+        /// 修改會員資料
+        /// </summary>
+        // PUT api/<controller>/
+        [HttpPut]
         public IHttpActionResult Put(DB_Member _model)
         {
 

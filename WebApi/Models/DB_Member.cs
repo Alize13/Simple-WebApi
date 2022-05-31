@@ -51,7 +51,7 @@ namespace WebApi.Models
         public string endDate { get; set; }
 
         /// <summary>
-        /// 篩選薪水運算子 EX:大於等於('>=')，小於等於('<=')
+        /// 篩選薪水運算子 EX:大於等於('＞＝')，小於等於('＜＝')
         /// </summary>
         public string trace_op
         {
@@ -123,8 +123,8 @@ namespace WebApi.Models
         public decimal MemberSalaly { get; set; }
         public string MemberInterests { get; set; }
         public string MemberInterests_Str { get; set; }
-        public int CreateUser { get; set; }
-        public string CreateDateTime { get; set; }
+        public string CreateUser { get; set; }
+        public DateTime CreateDateTime { get; set; }
 
         #endregion
 
@@ -305,17 +305,19 @@ namespace WebApi.Models
         /// <returns>0成功; string失敗</returns>
         public object Create()
         {
-            object retObj = new object();
+            object retObj = 0;
             try
             {
                 string cnStr = WebConfigurationManager.ConnectionStrings["DBTESTConnStr"].ConnectionString;
                 using (var cn = new SqlConnection(cnStr))
                 {
-                    dynamic result = cn.Query(@"INSERT INTO Member(MemberAccount, MemberName, MemberEmail, MemberLevel, MemberSalaly, CreateUser) 
-                            VALUES(@MemberAccount, @MemberName, @MemberEmail, @MemberLevel, @MemberSalaly, @CreateUser)",
+                    dynamic result = cn.Query(@"INSERT INTO Member(MemberAccount, MemberPwd, MemberName, MemberEmail, MemberLevel, MemberSalaly, MemberInterests, CreateUser) 
+                            VALUES(@MemberAccount, @MemberPwd, @MemberName, @MemberEmail, @MemberLevel, @MemberSalaly, @MemberInterests, @CreateUser)",
                         new
                         {
                             MemberAccount = this.MemberAccount
+                            ,
+                            MemberPwd = Security.EncodePassword(this.MemberPassword, SecurityType.UnIntact)
                             ,
                             MemberName = this.MemberName
                             ,
@@ -325,9 +327,10 @@ namespace WebApi.Models
                             ,
                             MemberSalaly = this.MemberSalaly
                             ,
+                            MemberInterests = this.MemberInterests
+                            ,
                             CreateUser = this.CreateUser
                         });
-                    retObj = result > 0 ? "0" : "新增失敗";
                 }
             }
             catch (Exception ex)
@@ -385,7 +388,6 @@ namespace WebApi.Models
                             });
 
                     }
-                    retObj = result > 0 ? "0" : "修改失敗";
                 }
             }
             catch (Exception ex)
